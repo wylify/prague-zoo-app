@@ -1,11 +1,11 @@
 const CACHE_NAME = 'prague-beer-zoo-v1';
 const ASSETS_TO_CACHE = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/logo.svg',
-  '/logo192.png',
-  '/logo512.png'
+  './',
+  './index.html',
+  './manifest.json',
+  './logo.svg',
+  './logo192.png',
+  './logo512.png'
 ];
 
 self.addEventListener('install', (event) => {

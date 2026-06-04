@@ -6,7 +6,7 @@ import './index.css';
 // Register the PWA service worker for robust offline operability
 if ('serviceWorker' in navigator && (import.meta as any).env.PROD) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('./sw.js')
       .then((reg) => {
         console.log('Beer Zoo service worker active on scope:', reg.scope);
       })
@@ -17,7 +17,7 @@ if ('serviceWorker' in navigator && (import.meta as any).env.PROD) {
 } else if ('serviceWorker' in navigator && !(import.meta as any).env.PROD) {
   // Offer sw registration in dev mode too for easier validation, but keeping console clear
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('./sw.js')
       .then((reg) => {
         console.log('Beer Zoo service worker active in development:', reg.scope);
       })
