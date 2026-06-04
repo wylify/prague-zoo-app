@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Fraunces", Georgia, Cambria, serif;
+  --color-editorial-bg: #FDFCF8;
+  --color-editorial-text: #1A1A1A;
+  --color-editorial-green: #2D3A27;
+  --color-editorial-beige: #E8E4D9;
+  --color-editorial-paper: #F2EFE9;
+  --color-editorial-muted: #636b5d;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --- PRINT-SPECIFIC CSS RULES FOR A4 PDF VOUCHER EXPORT --- */
+@media print {
+  /* Hide all generic interactive web elements */
+  .no-print,
+  #map-section,
+  #offline-section,
+  #stops-scheduled,
+  header,
+  footer,
+  aside,
+  button,
+  form,
+  nav {
+    display: none !important;
+  }
+
+  /* Reset body margins and background colors for high quality print */
+  html, body {
+    background: transparent !important;
+    color: #1c1917 !important; /* stone-900 */
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 297mm !important; /* Perfect Landscape A4 width */
+    height: 210mm !important; /* Perfect Landscape A4 height */
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force container to occupy exactly one horizontal/vertical A4 landscape page */
+  .print-page {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 297mm !important;
+    height: 210mm !important;
+    box-sizing: border-box !important;
+    border: 8px double rgba(120, 53, 4, 0.3) !important;
+    margin: 0 !important;
+    padding: 25mm 20mm !important; /* Generous margins for safe printable area */
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+    background-color: #fafaf9 !important; /* stone-50 background forced for high fidelity printing */
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  #voucher-root {
+    border: none !important;
+    background: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Prague Beer Zoo Voucher",
+  "description": "An elegant, offline-capable gift voucher and self-guided tour guide for the historic 11-stop Prague Beer Zoo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
