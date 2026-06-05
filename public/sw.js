@@ -45,25 +45,37 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Stale-While-Revalidate approach for local application shell & assets
+  // Robust Cache-First with Network-Fallback & Stale-While-Revalidate for local assets
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
+      if (cachedResponse) {
+        // Safe background update for local cache (Stale-While-Revalidate)
+        fetch(event.request)
+          .then((networkResponse) => {
+            if (networkResponse && networkResponse.status === 200) {
+              const cacheCopy = networkResponse.clone();
+              caches.open(CACHE_NAME).then((cache) => {
+                cache.put(event.request, cacheCopy);
+              });
+            }
+          })
+          .catch(() => {
+            // Ignore background fetch errors silently
+          });
+        return cachedResponse;
+      }
+
+      // Safe live fetch fallback for uncached assets (e.g. newly built hashed JS/CSS files)
+      return fetch(event.request)
         .then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+          if (networkResponse && networkResponse.status === 200) {
             const cacheCopy = networkResponse.clone();
             caches.open(CACHE_NAME).then((cache) => {
               cache.put(event.request, cacheCopy);
             });
           }
           return networkResponse;
-        })
-        .catch(() => {
-          // Catch and ignore fetch errors (e.g. offline dev system errors)
-          return null;
         });
-
-      return cachedResponse || fetchPromise;
     })
   );
 });
