@@ -16,18 +16,27 @@ export default function App() {
 
   // Load and save progress from browser memory
   const [userProgress, setUserProgress] = useState<UserNote[]>(() => {
-    try {
-      const saved = localStorage.getItem('prague_beer_zoo_progress');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {
-      console.error("Local storage fetching failed", e);
-    }
-    return BEER_STOPS_DATA.map(st => ({
+    const initialProgress: UserNote[] = BEER_STOPS_DATA.map(st => ({
       stopId: st.id,
       visited: false,
       rating: 0,
       notes: ''
     }));
+    try {
+      const saved = localStorage.getItem('prague_beer_zoo_progress');
+      if (saved) {
+        const parsed: UserNote[] = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return initialProgress.map(initialItem => {
+            const savedItem = parsed.find(p => p && p.stopId === initialItem.stopId);
+            return savedItem ? { ...initialItem, ...savedItem } : initialItem;
+          });
+        }
+      }
+    } catch (e) {
+      console.error("Local storage fetching failed", e);
+    }
+    return initialProgress;
   });
 
   // Auto-sync Quest stamps and journal notes to localStorage

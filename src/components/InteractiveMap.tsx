@@ -410,7 +410,7 @@ export default function InteractiveMap({
                   </div>
                   <h4 className="font-serif text-2xl font-black text-editorial-green italic">Offline Mode Active</h4>
                   <p className="text-xs text-stone-700 leading-relaxed font-serif">
-                    You of Prague's historic brick structures or cellar vaults (such as those at <strong>U Hrocha</strong>) may experience cellular failures. In offline mode, the live Google Maps frame is paused to preserve layout.
+                    Many of Prague's historic brick structures or cellar vaults (such as those at <strong>U Hrocha</strong>) may experience cellular failures. In offline mode, the live Google Maps frame is paused to preserve layout.
                   </p>
                   <p className="text-[11px] text-[#636b5d] italic font-mono uppercase tracking-[0.1em] font-semibold bg-[#F2EFE9] py-1 px-3">
                     Target Stop: Stop #{selectedStop?.id} - {selectedStop?.name} ({selectedStop?.originalName})
