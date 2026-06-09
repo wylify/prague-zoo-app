@@ -315,17 +315,12 @@ export default function InteractiveMap({
                     />
                   </g>
 
-                  {/* Excursion paths indicators to Smíchov and Bubeneč */}
+                  {/* Excursion paths indicators to Bubeneč */}
                   <g id="excursion-lines" stroke="#0ea5e9" strokeWidth="1.5" strokeDasharray="2 3" opacity="0.6">
                     {/* Hradčany -> Bubeneč (Stop 9 Veverka) */}
                     <path d="M 120 180 L 195 50" />
-                    {/* Malá Strana -> Smíchov (Stop 8 Buldok) */}
-                    <path d="M 230 180 L 260 410" />
                     <text x="160" y="110" fontSize="7" fill="#0284c7" fontWeight="medium" transform="rotate(-35, 160, 110)">
                       Tram 12/20 to Bubeneč
-                    </text>
-                    <text x="250" y="320" fontSize="7" fill="#0284c7" fontWeight="medium" transform="rotate(75, 250, 320)">
-                      Tram across Vltava to Smíchov
                     </text>
                   </g>
 

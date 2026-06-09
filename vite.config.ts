@@ -5,7 +5,7 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
-    base: './',
+    base: '/prague-zoo-app/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {

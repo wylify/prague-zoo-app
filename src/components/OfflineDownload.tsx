@@ -24,7 +24,7 @@ export default function OfflineDownload({ stops, userProgress }: OfflineDownload
     textContent += `------------------------------------------------------------------------\n\n`;
 
     stops.forEach((stop, index) => {
-      const isExcursion = stop.id === 8 || stop.id === 9;
+      const isExcursion = stop.id === 9;
       const progress = userProgress.find(p => p.stopId === stop.id);
       
       textContent += `[STOP #${stop.id}] ${stop.name.toUpperCase()}\n`;

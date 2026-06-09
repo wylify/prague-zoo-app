@@ -107,36 +107,45 @@ export default function App() {
     }
   };
 
+  const handleResetRatings = () => {
+    if (window.confirm("Are you sure you want to reset all of your pub ratings? This cannot be undone.")) {
+      setUserProgress(prev => prev.map(item => ({
+        ...item,
+        rating: 0
+      })));
+    }
+  };
+
   // Stats calculation
   const totalVisited = userProgress.filter(p => p.visited).length;
   const isQuestComplete = totalVisited === BEER_STOPS_DATA.length;
 
   return (
-    <div className="min-h-screen bg-[#F2EFE9] text-[#1A1A1A] antialiased font-sans flex flex-col justify-between selection:bg-amber-850/20 p-2 sm:p-4 md:p-8">
+    <div className="min-h-screen bg-[#F2EFE9] text-[#1A1A1A] antialiased font-sans flex flex-col justify-between selection:bg-amber-850/20 p-1 sm:p-4 md:p-8">
       
-      <div className="max-w-6xl w-full mx-auto bg-[#FDFCF8] border-[8px] md:border-[16px] border-[#E8E4D9] p-4 sm:p-6 md:p-12 shadow-sm relative flex flex-col flex-grow">
+      <div className="max-w-6xl w-full mx-auto bg-[#FDFCF8] border-2 sm:border-[8px] md:border-[16px] border-[#E8E4D9] p-2.5 sm:p-6 md:p-12 shadow-sm relative flex flex-col flex-grow">
         
         {/* Banner / Header Section in Editorial Aesthetic (Invisible when printing) */}
-        <header className="no-print flex flex-col md:flex-row justify-between items-start md:items-end border-b border-[#1A1A1A] pb-6 mb-8 gap-6 w-full">
+        <header className="no-print flex flex-col md:flex-row justify-between items-start md:items-end border-b border-[#1A1A1A] pb-4 md:pb-6 mb-4 md:mb-8 gap-4 md:gap-6 w-full">
           <div className="max-w-2xl space-y-2">
             <div className="flex items-center gap-2 text-editorial-green font-mono text-[10px] tracking-[0.2em] font-bold uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-editorial-green"></span>
               <span>11-Stop Authentic Self-Guided Draft Quest</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-black uppercase leading-none tracking-tighter italic text-editorial-green flex items-center gap-3">
-              <Beer className="w-8 h-8 md:w-12 md:h-12 text-editorial-green" />
+            <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-black uppercase leading-none tracking-tighter italic text-editorial-green flex items-center gap-2 sm:gap-3">
+              <Beer className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 text-editorial-green" />
               <span>Prague Beer Zoo</span>
             </h1>
-            <p className="font-serif text-lg md:text-xl italic opacity-85 uppercase tracking-widest text-[#636b5d]">
+            <p className="font-serif text-sm sm:text-base md:text-xl italic opacity-85 uppercase tracking-widest text-[#636b5d]">
               The Official Self-Guided Pilgrimage & Route Map / Pražská Pivní Zoo
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3 w-full md:w-auto">
             <button
               id="header-print-jump"
               onClick={() => window.print()}
-              className="px-4 py-2.5 bg-[#1A1A1A] hover:bg-[#2D3A27] text-white font-bold font-mono tracking-wider text-[11px] rounded-none transition cursor-pointer"
+              className="px-4 py-2 bg-[#1A1A1A] hover:bg-[#2D3A27] text-white font-bold font-mono tracking-wider text-[11px] rounded-none transition cursor-pointer text-center"
             >
               Print Route Guide (PDF)
             </button>
@@ -144,17 +153,17 @@ export default function App() {
         </header>
 
       {/* Main Content Area */}
-      <main className="max-w-6xl mx-auto px-4 md:px-6 py-6 md:py-10 space-y-10 w-full flex-grow">
+      <main className="max-w-6xl mx-auto px-1 sm:px-4 md:px-6 py-4 md:py-10 space-y-6 md:space-y-10 w-full flex-grow">
         
         {/* Intro Block - Brief Context (Invisible when printing) */}
-        <section className="no-print bg-[#FDFCF8] border border-[#1A1A1A] p-6 md:p-8 relative overflow-hidden grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+        <section className="no-print bg-[#FDFCF8] border border-[#1A1A1A] p-4 md:p-8 relative overflow-hidden grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
           <div className="md:col-span-2 space-y-4 flex flex-col justify-center">
             <div>
               <div className="inline-block bg-[#2D3A27] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1.5 rounded-none">
                 Czech Heritage Walk
               </div>
             </div>
-            <h2 className="font-serif text-3xl md:text-4xl font-black text-editorial-green italic tracking-tight">
+            <h2 className="font-serif text-2xl md:text-3xl font-black text-editorial-green italic tracking-tight">
               About the Prague Beer Zoo Challenge
             </h2>
             <p className="text-xs md:text-sm text-editorial-text leading-relaxed font-sans">
@@ -165,12 +174,12 @@ export default function App() {
             </p>
           </div>
 
-          <div className="bg-[#2D3A27] text-[#FDFCF8]/95 p-6 border-l border-[#1A1A1A] space-y-4 flex flex-col justify-center">
+          <div className="bg-[#2D3A27] text-[#FDFCF8]/95 p-4 md:p-6 border-l border-[#1A1A1A] space-y-3 md:space-y-4 flex flex-col justify-center">
             <h3 className="font-serif text-lg font-bold border-b border-[#FDFCF8]/20 pb-2 text-white flex items-center justify-between">
               <span className="italic">Trail Rules & Strategy</span>
               <Award className="w-5 h-5 text-amber-300" />
             </h3>
-            <ul className="text-xs space-y-3 font-sans">
+            <ul className="text-xs space-y-2 md:space-y-3 font-sans">
               <li className="flex items-start gap-1.5">
                 <span className="text-amber-300 font-bold">✔</span>
                 <span><strong>No speed running</strong>: Order 0.3L fractions or traditional lunch foods to pace yourself.</span>
@@ -200,7 +209,7 @@ export default function App() {
 
         {/* Section 3: Intuitive Category Guide Schedule */}
         <section id="stops-scheduled" className="space-y-4">
-          <div className="no-print flex items-center justify-between flex-wrap gap-2 px-1">
+          <div className="no-print flex items-stretch md:items-center justify-between flex-col md:flex-row gap-3 px-1">
             <div className="space-y-0.5">
               <h3 className="font-serif text-lg font-bold text-stone-900 flex items-center gap-2">
                 <Layers className="w-5 h-5 text-amber-700" />
@@ -209,14 +218,21 @@ export default function App() {
               <p className="text-xs text-stone-500">Interactive tracker, opening days, payment details and notes.</p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="text-xs bg-stone-200 border border-stone-300 px-3 py-1.5 rounded-lg font-mono font-bold text-stone-700">
-                Quest Progress: {totalVisited} of 11 Visited
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="text-xs bg-stone-200 border border-stone-300 px-2 sm:px-3 py-1.5 rounded-lg font-mono font-bold text-stone-700">
+                Quest: {totalVisited}/11 Visited
               </div>
+              <button
+                id="reset-ratings-btn"
+                onClick={handleResetRatings}
+                className="text-xs font-semibold px-2 sm:px-2.5 py-1.5 border border-stone-300 rounded-lg hover:bg-stone-100 text-stone-600 transition cursor-pointer bg-white"
+              >
+                Reset Ratings
+              </button>
               <button
                 id="reset-tracker-btn"
                 onClick={handleResetProgress}
-                className="text-xs font-semibold px-2.5 py-1.5 border border-stone-300 rounded-lg hover:bg-stone-100 text-stone-500 transition cursor-pointer"
+                className="text-xs font-semibold px-2 sm:px-2.5 py-1.5 border border-stone-300 rounded-lg hover:bg-stone-100 text-stone-600 transition cursor-pointer bg-white"
               >
                 Reset Stamps
               </button>

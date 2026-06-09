@@ -163,7 +163,7 @@ export const BEER_STOPS_DATA: BeerStop[] = [
     highlightIcon: "flame"
   },
   {
-    id: 11,
+    id: 10,
     name: "Red Stag",
     originalName: "Restaurace Červený Jelen",
     animal: "Deer / Stag",
@@ -186,7 +186,7 @@ export const BEER_STOPS_DATA: BeerStop[] = [
     highlightIcon: "sparkles"
   },
   {
-    id: 10,
+    id: 11,
     name: "Two Roosters",
     originalName: "Pivovarnická hospoda Dva Kohouti",
     animal: "Rooster",
@@ -214,18 +214,18 @@ export const BEER_STOPS_DATA: BeerStop[] = [
     originalName: "Hospoda U Buldoka",
     animal: "Bulldog",
     animalEmoji: "🐶",
-    address: "Preslova 353/1, 150 00 Prague 5 - Smíchov",
-    latitude: 50.073610,
-    longitude: 14.407220,
+    address: "Dlouhá 709/26, 110 00 Prague 1 - Staré Město",
+    latitude: 50.090100,
+    longitude: 14.425800,
     hours: {
       saturday: "11:00 – 00:00",
       sunday: "12:00 – 22:00"
     },
     payment: "Cash & Card",
-    beers: ["Staropramen (Tank lager)", "Pilsner Urquell", "Buldok cherry special"],
-    description: "Slightly south in the historic Smíchov industrial neighborhood, U Buldoka is styled with dozens of bulldog statues, paintings, and historical dog decor. Known for its neighborhood sports pub charm and hearty portions.",
-    history: "A classic neighborhood tavern that stood since early industrial Smíchov development. It showcases Prague’s favorite local southside brewery, Staropramen, which is brewed just a few blocks away.",
-    shortFact: "An iconic Smíchov neighborhood pub completely dedicated to Bulldogs!",
+    beers: ["Pilsner Urquell", "Buldok cherry special", "Staropramen"],
+    description: "Now relocated to a beautiful, historic cellar in Prague's Old Town, U Buldoka preserves its classic atmosphere. It is still styled with dozens of bulldog statues, paintings, and historical dog decor, serving hearty Czech portions.",
+    history: "Originally founded in Prague 5 - Smíchov, this beloved pub recently moved to Staré Město. While it no longer sits directly near the Smíchov industrial brewery, it continues to tap excellent Pilsner alongside its famous Buldok cherry special.",
+    shortFact: "This iconic pup-themed pub moved from Smíchov to Staré Město, bringing its entire bulldog universe along!",
     difficulty: 2,
     googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=Hospoda+U+Buldoka+Prague",
     avgPriceCoefficients: 1,
@@ -257,9 +257,9 @@ export const BEER_STOPS_DATA: BeerStop[] = [
 ];
 
 export const TOUR_SUMMARY = {
-  totalDistanceKm: "approx. 11.2 km (for the complete 11-stop loop, or 4.5 km for the 7 old-town stops core walking route)",
-  coreWalkingRoute: [1, 3, 2, 4, 7, 5, 6, 11, 10], // Hradčany -> Malá Strana -> Staré Město -> Nové Město -> Karlín
-  excursionStops: [8, 9], // Smíchov & Bubeneč (recommend taking public tram!)
-  tramAdvice: "For stops 8 (Smíchov) and 9 (Bubeneč), use Prague's ultra-reliable tram lines! Take Tram 12/20 across the river, or Metro A (Hradčanská) to reach Bubeneč.",
+  totalDistanceKm: "approx. 10.5 km (for the complete 11-stop loop, or 5.2 km for the 8 old-town stops core walking route)",
+  coreWalkingRoute: [1, 3, 2, 4, 8, 7, 5, 6, 10, 11], // Hradčany -> Malá Strana -> Staré Město -> Nové Město -> Karlín
+  excursionStops: [9], // Bubeneč (recommend taking public tram!)
+  tramAdvice: "For stop 9 (Bubeneč), use Prague's ultra-reliable tram lines! Take Tram 12/20 across the river, or Metro A (Hradčanská) to reach Bubeneč.",
   averageCostInfo: "A half-liter of tank lager ranges from 55 CZK to 85 CZK (approx. 2.20€ to 3.40€)."
 };
