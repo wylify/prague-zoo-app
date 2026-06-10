@@ -1,0 +1,34 @@
+{
+  "short_name": "Prague Beer Zoo",
+  "name": "Prague Beer Zoo Self-Guided Quest",
+  "description": "Pilgrimage of Prague's historic animal-themed taverns.",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "background_color": "#F2EFE9",
+  "theme_color": "#2D3A27",
+  "display": "standalone",
+  "orientation": "portrait"
+}

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Background Shield/Circle -->
+  <rect width="512" height="512" rx="112" fill="#2D3A27" />
+  
+  <!-- Outer Ornate Ring -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#E8E4D9" stroke-width="8" stroke-dasharray="14 10" />
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#d97706" stroke-width="3" />
+  
+  <!-- Inner circular badge -->
+  <circle cx="256" cy="256" r="150" fill="#202c1a" />
+  
+  <!-- Central Graphic: Beer Mug + Claw/Paw Emblem -->
+  <!-- Mug Handle -->
+  <path d="M 320 200 L 350 200 C 375 200, 375 290, 350 290 L 320 290" fill="none" stroke="#E8E4D9" stroke-width="16" stroke-linecap="round" />
+  
+  <!-- Mug Body -->
+  <rect x="180" y="170" width="140" height="150" rx="16" fill="#E8E4D9" />
+  
+  <!-- Beer Lines inside Mug -->
+  <line x1="215" y1="200" x2="215" y2="290" stroke="#d97706" stroke-width="10" stroke-linecap="round" />
+  <line x1="250" y1="200" x2="250" y2="290" stroke="#d97706" stroke-width="10" stroke-linecap="round" />
+  <line x1="285" y1="200" x2="285" y2="290" stroke="#d97706" stroke-width="10" stroke-linecap="round" />
+  
+  <!-- Mug Foam Header -->
+  <path d="M 170 170 Q 200 145, 230 170 Q 256 140, 282 170 Q 312 145, 330 170 L 330 185 L 170 185 Z" fill="#FFFFFF" />
+  <circle cx="200" cy="155" r="14" fill="#FFFFFF" />
+  <circle cx="245" cy="144" r="18" fill="#FFFFFF" />
+  <circle cx="290" cy="150" r="16" fill="#FFFFFF" />
+  
+  <!-- Animal Paw Footprint Accents (Prague Beer ZOO themed) -->
+  <circle cx="256" cy="380" r="14" fill="#d97706" />
+  <circle cx="216" cy="390" r="11" fill="#d97706" />
+  <circle cx="296" cy="390" r="11" fill="#d97706" />
+  <circle cx="186" cy="410" r="9" fill="#d97706" />
+  <circle cx="326" cy="410" r="9" fill="#d97706" />
+
+  <!-- Stars representing the golden draft trail -->
+  <polygon points="256,70 261,85 277,85 264,96 269,111 256,102 243,111 248,96 235,85 251,85" fill="#d97706" />
+  <polygon points="120,256 125,271 141,271 128,282 133,297 120,288 107,297 112,282 99,271 115,271" fill="#d97706" transform="scale(0.8) translate(50, 50)" />
+  <polygon points="392,256 397,271 413,271 400,282 405,297 392,288 379,297 384,282 371,271 387,271" fill="#d97706" transform="scale(0.8) translate(100, 50)" />
+</svg>
