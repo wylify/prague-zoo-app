@@ -4,15 +4,38 @@ import { BeerStop, UserNote } from './types';
 import InteractiveMap from './components/InteractiveMap';
 import TourSchedule from './components/TourSchedule';
 import OfflineDownload from './components/OfflineDownload';
-import { Compass, Gift, Calendar, Sparkles, MapPin, RefreshCw, Layers, Award, CheckCircle, Info, Beer } from 'lucide-react';
+import { Compass, Gift, Calendar, Sparkles, MapPin, RefreshCw, Layers, Award, CheckCircle, Info, Beer, ArrowUp } from 'lucide-react';
 
 export default function App() {
-  const [selectedStopId, setSelectedStopId] = useState<number | null>(1);
+  const [selectedStopId, setSelectedStopId] = useState<number | null>(null);
+  const [showScrollButton, setShowScrollButton] = useState<boolean>(false);
   
   // Initialize device online status directly from navigator data
   const [isOffline, setIsOffline] = useState<boolean>(() => {
     return typeof navigator !== 'undefined' ? !navigator.onLine : false;
   });
+
+  // Monitor scroll height to show/hide the floating button
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 350) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleScrollToMap = () => {
+    const mapElement = document.getElementById('interactive-map');
+    if (mapElement) {
+      mapElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   // Load and save progress from browser memory
   const [userProgress, setUserProgress] = useState<UserNote[]>(() => {
@@ -130,25 +153,15 @@ export default function App() {
           <div className="max-w-2xl space-y-2">
             <div className="flex items-center gap-2 text-editorial-green font-mono text-[10px] tracking-[0.2em] font-bold uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-editorial-green"></span>
-              <span>11-Stop Authentic Self-Guided Draft Quest</span>
+              <span>11-Stop Authentic Self-Guided Beer Quest</span>
             </div>
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-serif font-black uppercase leading-none tracking-tighter italic text-editorial-green flex items-center gap-2 sm:gap-3">
               <Beer className="w-6 h-6 sm:w-8 sm:h-8 md:w-12 md:h-12 text-editorial-green" />
               <span>Prague Beer Zoo</span>
             </h1>
             <p className="font-serif text-sm sm:text-base md:text-xl italic opacity-85 uppercase tracking-widest text-[#636b5d]">
-              The Official Self-Guided Pilgrimage & Route Map / Pražská Pivní Zoo
+              The Self-Guided Pilgrimage & Route Map / Pražská Pivní Zoo
             </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 md:gap-3 w-full md:w-auto">
-            <button
-              id="header-print-jump"
-              onClick={() => window.print()}
-              className="px-4 py-2 bg-[#1A1A1A] hover:bg-[#2D3A27] text-white font-bold font-mono tracking-wider text-[11px] rounded-none transition cursor-pointer text-center"
-            >
-              Print Route Guide (PDF)
-            </button>
           </div>
         </header>
 
@@ -160,14 +173,14 @@ export default function App() {
           <div className="md:col-span-2 space-y-4 flex flex-col justify-center">
             <div>
               <div className="inline-block bg-[#2D3A27] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-3 py-1.5 rounded-none">
-                Czech Heritage Walk
+                Czech Beer Heritage Walk
               </div>
             </div>
             <h2 className="font-serif text-2xl md:text-3xl font-black text-editorial-green italic tracking-tight">
               About the Prague Beer Zoo Challenge
             </h2>
             <p className="text-xs md:text-sm text-editorial-text leading-relaxed font-sans">
-              The <strong>Prague Beer Zoo</strong> is a beautiful, unofficial tavern trail passing through the most famous, centuries-old Czech pubs that bear an animal name. There is no official club or corporate register — the idea was created purely among old-world tavern regulars and local draftsmen. 
+              The <strong>Prague Beer Zoo</strong> is a beautiful, tavern trail passing through the most famous, centuries-old Czech pubs that bear an animal name. The idea was created purely among old-world tavern regulars and locals. 
             </p>
             <p className="text-xs md:text-sm text-editorial-text leading-relaxed font-sans mt-2">
               Our quest maps the original 11 legendary stops (representing creatures like <strong>oxen, hippos, bears, cats, roosters</strong>, and <strong>stags</strong>). Follow this guide to challenge yourself or explore with friends to complete the trail!
@@ -182,22 +195,22 @@ export default function App() {
             <ul className="text-xs space-y-2 md:space-y-3 font-sans">
               <li className="flex items-start gap-1.5">
                 <span className="text-amber-300 font-bold">✔</span>
-                <span><strong>No speed running</strong>: Order 0.3L fractions or traditional lunch foods to pace yourself.</span>
+                <span><strong>No speed running</strong>: Order small beers or traditional lunch foods to pace yourself.</span>
               </li>
               <li className="flex items-start gap-1.5">
                 <span className="text-amber-300 font-bold">✔</span>
-                <span><strong>Bring Czech Koruna (CZK)</strong>: Inner-city castle taverns are historically cash-only!</span>
+                <span><strong>Bring Cash (CZK)</strong>: Inner-city castle taverns are historically cash-only!</span>
               </li>
               <li className="flex items-start gap-1.5">
                 <span className="text-amber-300 font-bold">✔</span>
-                <span><strong>Respect Regulars</strong>: Do not block tables. Stand with local štamgasti near the wooden taps.</span>
+                <span><strong>Respect Regulars</strong>: Do not block tables.</span>
               </li>
             </ul>
           </div>
         </section>
 
         {/* Section 2: Interactive Maps View */}
-        <section className="no-print space-y-4">
+        <section id="interactive-map" className="no-print scroll-mt-6 space-y-4">
           <InteractiveMap
             stops={BEER_STOPS_DATA}
             selectedStopId={selectedStopId}
@@ -296,13 +309,28 @@ export default function App() {
             &ldquo;Kdo nepije pivo, není Čech!&rdquo; — Who doesn&apos;t drink beer, is not a Czech.
           </p>
           <p className="leading-relaxed opacity-90 font-sans">
-            Please drink responsibly. Always bring CZK when hiking around Prague Castle. Standard tip is 10% round-up. All stops information is adapted from actual Prague tavern insider circles and historical documents. 
+            Please drink responsibly. Always bring CZK when walking around Prague Castle. Standard tip approx 10% round-up.
           </p>
           <div className="text-[10px] text-[#FDFCF8]/60 font-mono tracking-widest uppercase">
-            PRAGUE BEER ZOO SELF-GUIDED TOUR VOUCHER &bull; DESIGNED IN COOP WITH TOURISM REGULARS
+            PRAGUE BEER ZOO SELF-GUIDED TOUR
           </div>
         </div>
       </footer>
+
+      {/* Floating Scroll to Interactive Map Button */}
+      {showScrollButton && (
+        <button
+          onClick={handleScrollToMap}
+          className={`no-print fixed right-6 z-30 flex items-center justify-center p-3 rounded-full bg-[#2D3A27] text-white hover:bg-[#1c2518] shadow-2xl transition-all duration-300 hover:scale-110 border-2 border-[#E8E4D9] focus:outline-none focus:ring-2 focus:ring-[#2D3A27] cursor-pointer ${
+            totalVisited > 0 ? 'bottom-28 sm:bottom-28' : 'bottom-6 sm:bottom-8'
+          }`}
+          title="Scroll up to interactive map"
+          aria-label="Scroll up to interactive map"
+          id="btn-scroll-to-map"
+        >
+          <ArrowUp className="w-5 h-5" />
+        </button>
+      )}
 
       </div> {/* Close max-w-6xl Central Paper Layout Sheet */}
     </div>

@@ -76,17 +76,6 @@ export default function OfflineDownload({ stops, userProgress }: OfflineDownload
           Historical pubs like <strong>U Hrocha</strong> and <strong>U Černého vola</strong> are located deep in stone basements or castle vaults where cellular connections completely fail. Use our download tools to secure your tour without cellular roaming.
         </p>
         
-        {/* Help indicators */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-[11px] font-sans text-stone-600 pt-1">
-          <div className="flex gap-1.5 items-start">
-            <ShieldCheck className="w-4 h-4 text-emerald-800 flex-shrink-0" />
-            <span><strong>Cash Safe Guard</strong>: Learn payment warnings to avoid awkward checkouts.</span>
-          </div>
-          <div className="flex gap-1.5 items-start">
-            <CloudRain className="w-4 h-4 text-emerald-800 flex-shrink-0" />
-            <span><strong>Downloaded Notes</strong>: Saved journal details export correctly for memory lanes.</span>
-          </div>
-        </div>
       </div>
 
       {/* Action panel column */}
