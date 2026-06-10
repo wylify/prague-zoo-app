@@ -68,6 +68,11 @@ export default function App() {
     };
   }, []);
 
+  // Ensure the app opens at the top of the page on initial load
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   // Handler functions
   const handleSelectStop = (id: number) => {
     setSelectedStopId(id);

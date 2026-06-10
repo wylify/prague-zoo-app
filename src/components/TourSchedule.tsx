@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { BeerStop, UserNote } from '../types';
 import { BEER_STOPS_DATA } from '../data';
 import { Search, SlidersHorizontal, BookOpen, AlertTriangle, CreditCard, Banknote, MapPin, ExternalLink, Sparkles, CheckSquare, Clock } from 'lucide-react';
@@ -24,6 +24,7 @@ export default function TourSchedule({
 }: TourScheduleProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<'all' | 'castle' | 'old-town' | 'extensions'>('all');
+  const isFirstRender = useRef(true);
 
   // Categorize stops into intuitive buckets for easy navigation
   const getCategory = (stop: BeerStop): 'castle' | 'old-town' | 'extensions' => {
@@ -44,6 +45,11 @@ export default function TourSchedule({
 
   // Reset filter and scroll when selectedStopId changes
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
     if (selectedStopId) {
       const targetStop = stops.find(s => s.id === selectedStopId);
       if (targetStop) {
