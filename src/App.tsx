@@ -71,11 +71,6 @@ export default function App() {
   // Handler functions
   const handleSelectStop = (id: number) => {
     setSelectedStopId(id);
-    // Auto-scroll to selected stop if needed (only on screens that aren't printed)
-    const targetElement = document.getElementById(`stop-card-${id}`);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
   };
 
   const handleToggleVisited = (id: number) => {

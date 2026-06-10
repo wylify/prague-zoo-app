@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { BeerStop, UserNote } from '../types';
 import { BEER_STOPS_DATA } from '../data';
 import { Search, SlidersHorizontal, BookOpen, AlertTriangle, CreditCard, Banknote, MapPin, ExternalLink, Sparkles, CheckSquare, Clock } from 'lucide-react';
@@ -41,6 +41,37 @@ export default function TourSchedule({
     if (id === 4 || id === 5 || id === 6 || id === 7 || id === 8) return { label: 'OLD TOWN CORE', bg: 'bg-[#E8E4D9] text-[#1A1A1A] border-[#1A1A1A]/20' };
     return { label: 'URBAN EXTENSION', bg: 'bg-white text-stone-700 border border-[#1A1A1A]' };
   };
+
+  // Reset filter and scroll when selectedStopId changes
+  useEffect(() => {
+    if (selectedStopId) {
+      const targetStop = stops.find(s => s.id === selectedStopId);
+      if (targetStop) {
+        const term = searchTerm.toLowerCase();
+        const matchesSearch = term === '' || 
+          targetStop.name.toLowerCase().includes(term) ||
+          targetStop.originalName.toLowerCase().includes(term) ||
+          targetStop.beers.some(b => b.toLowerCase().includes(term)) ||
+          targetStop.description.toLowerCase().includes(term);
+
+        const matchesCategory = selectedCategory === 'all' || getCategory(targetStop) === selectedCategory;
+
+        if (!matchesSearch || !matchesCategory) {
+          setSearchTerm('');
+          setSelectedCategory('all');
+        }
+
+        // Smooth scroll to card after rendering updates
+        setTimeout(() => {
+          const targetElement = document.getElementById(`stop-card-${selectedStopId}`);
+          if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }, 120);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedStopId]);
 
   // Process search, filters, and sorts
   const processedStops = useMemo(() => {

@@ -162,11 +162,8 @@ export default function InteractiveMap({
         </div>
       </div>
 
-      {/* Grid: Map + Stop Side-Peek panel */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        
-        {/* Map Container */}
-        <div className="lg:col-span-3 bg-stone-50 border border-[#1A1A1A] rounded-none overflow-hidden relative min-h-[400px] flex flex-col justify-center items-center">
+      {/* Map Container */}
+      <div className="w-full bg-stone-50 border border-[#1A1A1A] rounded-none overflow-hidden relative min-h-[400px] flex flex-col justify-center items-center">
           
           {activeTab === 'tourist' ? (
             // CUSTOM ARTISTIC VECTOR MAP OF PRAGUE
@@ -503,98 +500,7 @@ export default function InteractiveMap({
           )}
         </div>
 
-        {/* Selected Stop Side Peek Panel */}
-        <div id="side-peek-panel" className="bg-[#FDFCF8] text-[#1A1A1A] border-4 border-[#E8E4D9] p-5 flex flex-col justify-between shadow-xs">
-          {selectedStop ? (
-            <div className="space-y-4">
-              <div className="border-b border-[#1A1A1A]/10 pb-3">
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-[#2D3A27] text-xs font-bold uppercase tracking-widest">STOP #{selectedStop.id}</span>
-                  <span className="text-2xl">{selectedStop.animalEmoji}</span>
-                </div>
-                <h4 className="font-serif text-xl text-editorial-green font-black tracking-tight mt-1 italic">{selectedStop.name}</h4>
-                <p className="font-serif text-[#636b5d] italic text-xs mt-0.5">{selectedStop.originalName}</p>
-              </div>
 
-              <div className="space-y-3.5 text-xs text-[#1A1A1A]">
-                <div>
-                  <span className="text-[#636b5d] text-[10px] uppercase font-mono font-bold block">Beer Selection:</span>
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {selectedStop.beers.map(b => (
-                      <span key={b} className="bg-[#F2EFE9] text-[#2D3A27] border border-[#2D3A27]/20 px-2 py-0.5 text-[10px] font-mono font-bold">
-                        {b}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <span className="text-[#636b5d] text-[10px] uppercase font-mono font-bold block">Payment Terms:</span>
-                  <span className={`inline-block font-mono font-bold mt-0.5 text-xs ${
-                    selectedStop.payment.includes('Cash Only') ? 'text-rose-700' : 'text-emerald-800'
-                  }`}>
-                    ◆ {selectedStop.payment}
-                  </span>
-                </div>
-
-                <div>
-                  <span className="text-[#636b5d] text-[10px] uppercase font-mono font-bold block">Weekend Hours:</span>
-                  <div className="grid grid-cols-2 gap-2 font-mono text-[10px] text-[#1A1A1A] mt-1 bg-[#F2EFE9] p-2 border border-[#E8E4D9]">
-                    <div>
-                      <span className="text-stone-500 font-bold block">SATURDAY</span>
-                      <span className="font-bold">{selectedStop.hours.saturday.split(' ')[0]}</span>
-                    </div>
-                    <div>
-                      <span className="text-stone-500 font-bold block">SUNDAY</span>
-                      <span className="font-bold">{selectedStop.hours.sunday.split(' ')[0]}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <span className="text-[#636b5d] text-[10px] uppercase font-mono font-bold block">Short Highlight:</span>
-                  <p className="leading-relaxed mt-1 text-[#1A1A1A] text-xs bg-[#FDFCF8] p-2.5 border border-[#1A1A1A]/15 italic font-serif">
-                    &ldquo;{selectedStop.shortFact}&rdquo;
-                  </p>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center h-full text-center text-[#636b5d] p-4">
-              <Compass className="w-8 h-8 text-[#2D3A27]/30 mb-2" />
-              <p className="text-xs font-serif italic text-stone-500">Select a stop on the map trace or the guide list to preview direct stop metadata.</p>
-            </div>
-          )}
-
-          {selectedStop && (
-            <div className="pt-4 border-t border-[#1A1A1A]/10 mt-4 flex items-center justify-between">
-              <div className="flex items-center gap-1">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span
-                    key={i}
-                    className={`text-[11px] ${
-                      i < selectedStop.difficulty ? 'text-amber-600' : 'text-stone-300'
-                    }`}
-                  >
-                    ★
-                  </span>
-                ))}
-                <span className="text-[9px] text-[#636b5d] font-mono font-bold ml-1 uppercase">Crowd Risk</span>
-              </div>
-              <a
-                id="maps-jump-link"
-                href={selectedStop.googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 text-[11px] font-mono font-bold text-[#2D3A27] hover:underline transition"
-              >
-                <span>Walk Directions</span>
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-            </div>
-          )}
-        </div>
-      </div>
     </div>
   );
 }
