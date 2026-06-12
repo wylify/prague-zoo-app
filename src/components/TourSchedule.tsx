@@ -279,7 +279,7 @@ export default function TourSchedule({
                             style={{ border: 0 }}
                             loading="lazy"
                             referrerPolicy="no-referrer"
-                            src={`https://maps.google.com/maps?q=${stop.latitude},${stop.longitude}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
+                            src={`https://maps.google.com/maps?q=${encodeURIComponent(stop.originalName + ', ' + stop.address)}&t=&z=16&ie=UTF8&iwloc=&output=embed`}
                           ></iframe>
                         </div>
                       </div>
@@ -303,14 +303,14 @@ export default function TourSchedule({
                       {/* Rating selector */}
                       <div className="flex items-center gap-2 pt-1 font-sans">
                         <span className="text-[9px] sm:text-[10px] uppercase font-mono text-[#636b5d] font-bold">Your Rating:</span>
-                        <div className="flex gap-1">
+                        <div className="flex gap-1 items-center">
                           {[1, 2, 3, 4, 5].map((star) => (
                             <button
                               key={star}
                               id={`rate-btn-${stop.id}-${star}`}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                onUpdateRating(stop.id, star);
+                                onUpdateRating(stop.id, star === progress.rating ? 0 : star);
                               }}
                               className={`text-base leading-none transition duration-100 cursor-pointer ${
                                 star <= progress.rating ? 'text-amber-600 hover:scale-110' : 'text-stone-300 hover:text-[#2D3A27]'
@@ -319,6 +319,20 @@ export default function TourSchedule({
                               ★
                             </button>
                           ))}
+                          {progress.rating > 0 && (
+                            <button
+                              type="button"
+                              id={`clear-rating-btn-${stop.id}`}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onUpdateRating(stop.id, 0);
+                              }}
+                              className="ml-2 text-[10px] font-mono font-bold px-1.5 py-0.5 bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-600 rounded-none cursor-pointer"
+                              title="Reset rating"
+                            >
+                              Reset
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>

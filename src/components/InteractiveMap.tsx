@@ -163,7 +163,7 @@ export default function InteractiveMap({
       </div>
 
       {/* Map Container */}
-      <div className="w-full bg-stone-50 border border-[#1A1A1A] rounded-none overflow-hidden relative min-h-[400px] flex flex-col justify-center items-center">
+      <div className="w-full bg-stone-50 border border-[#1A1A1A] rounded-none overflow-hidden relative h-[500px] sm:h-[580px] md:h-[650px] flex flex-col justify-between items-stretch">
           
           {activeTab === 'tourist' ? (
             // CUSTOM ARTISTIC VECTOR MAP OF PRAGUE
@@ -434,7 +434,7 @@ export default function InteractiveMap({
               </div>
             ) : (
               // EMBED DIRECTION / GOOGLE MAP VIEWER COOP FOR THE ACTIVE STOP
-              <div className="w-full h-full flex flex-col justify-between p-4 bg-stone-50">
+              <div className="w-full h-full flex flex-col justify-between p-4 bg-stone-50 flex-1">
                 <div className="flex justify-between items-center text-xs text-[#2D3A27] bg-[#F2EFE9] p-2 rounded-none border border-[#E8E4D9] mb-3">
                   <div className="flex items-center gap-1.5 font-mono font-bold">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-700 animate-pulse"></span>

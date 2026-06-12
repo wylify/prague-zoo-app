@@ -199,10 +199,6 @@ export default function App() {
               </li>
               <li className="flex items-start gap-1.5">
                 <span className="text-amber-300 font-bold">✔</span>
-                <span><strong>Bring Cash (CZK)</strong>: Inner-city castle taverns are historically cash-only!</span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <span className="text-amber-300 font-bold">✔</span>
                 <span><strong>Respect Regulars</strong>: Do not block tables.</span>
               </li>
             </ul>
